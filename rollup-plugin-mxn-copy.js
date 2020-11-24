@@ -76,7 +76,7 @@ module.exports = function(options) {
     // Setting default options
     const defaults = {
         assets: [],
-        verbose: true,
+        verbose: false,
         overwrite: true,
         include: "*.svg",
         prepend: "**/"
