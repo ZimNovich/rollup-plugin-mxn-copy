@@ -17,22 +17,14 @@ $ npm install --save-dev rollup-plugin-mxn-copy
 
 ## Usage
 
-Suppose an input file containing the snippet below exists at `src/index.js`, and attempts to load `src/logo.svg` as follows:
+Suppose we have a bunch of assets in `./src` directory:
 
 ```bash
-# ls -d -1 /home/setevoy/*/
-/home/setevoy/Desktop/
-/home/setevoy/Downloads/
-/home/setevoy/Dropbox/
-/home/setevoy/Images/
-/home/setevoy/Soft/
-/home/setevoy/Temp/
-/home/setevoy/VirtualBox VMs/
-
-// src/index.js
-import Logo from './logo.svg';
-
-console.log(Logo);
+# ls -1 ./src
+index.html
+index.js
+logo.svg
+preact
 ```
 
 Create a `rollup.config.js` [configuration file](https://www.rollupjs.org/guide/en/#configuration-files) and import the plugin:
