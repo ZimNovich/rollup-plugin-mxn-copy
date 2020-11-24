@@ -58,6 +58,8 @@ export default {
 
 Then call `rollup` either via the [CLI](https://www.rollupjs.org/guide/en/#command-line-reference) or the [API](https://www.rollupjs.org/guide/en/#javascript-api).
 
+On final bundle generation the provided files will be copied over into the output folder of your rollup bundle, maintaining the original hierarchy and relativity to the input file.
+
 ## Options
 
 This plugin has the following configuration options:
@@ -67,81 +69,9 @@ This plugin has the following configuration options:
 | `assets`    | An array of strings with `import` statements that will be inserted at the beginning of the resulting file. | `"import {h} from \"preact\";"` |
 | `verbose`   | This property specifies which files to include. It is a single [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)), or an array of them. | `false` |
 
-## Examples
-
-
-
-
-
-
-
-
-
-
-
-## Install
-
-```
-$ npm install rollup-plugin-mxn-copy
-```
-
-## Usage
-
-Use it like this in your rollup.config:
-
-```js
-import rollupMxnCopy from "rollup-plugin-mxn-copy";
-
-export default {
-	input: "src/index.js",
-	external: [
-		"preact",
-		"prop-types"
-	],
-	output: {
-		file: "bundle/bundle.js",
-		format: "iife",
-		name: "App",
-		sourcemap: false,
-		globals: {
-			"preact": "preact",
-			"prop-types": "PropTypes"
-		}
-	},
-	plugins: [
-		rollupMxnJsx({
-			factory: "h",
-			include: ["*.js", "*.jsx"]
-		})
-	]
-};
-
-```
-
 ## License
 
 This module is released under the MIT license.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Related
 
