@@ -27,6 +27,8 @@ logo.svg
 preact
 ```
 
+We want some of these files to be copied over into the output folder of our rollup bundle.
+
 Create a `rollup.config.js` [configuration file](https://www.rollupjs.org/guide/en/#configuration-files) and import the plugin:
 
 ```js
@@ -66,8 +68,8 @@ This plugin has the following configuration options:
 
 | Property    | Description    | Default      |
 |-------------|----------------|--------------|
-| `assets`    | An array of strings with `import` statements that will be inserted at the beginning of the resulting file. | `"import {h} from \"preact\";"` |
-| `verbose`   | This property specifies which files to include. It is a single [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)), or an array of them. | `false` |
+| `assets`    | An array of paths to files or directories to copy to the output folder. | `[]` |
+| `verbose`   | This option will output additional information about operations being performed. | `false` |
 
 ## License
 
