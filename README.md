@@ -16,7 +16,7 @@ $ npm install rollup-plugin-mxn-copy
 Use it like this in your rollup.config:
 
 ```js
-import rollupMxnJsx from "rollup-plugin-mxn-jsx";
+import rollupMxnCopy from "rollup-plugin-mxn-copy";
 
 export default {
 	input: "src/index.js",
