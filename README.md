@@ -20,6 +20,15 @@ $ npm install --save-dev rollup-plugin-mxn-copy
 Suppose an input file containing the snippet below exists at `src/index.js`, and attempts to load `src/logo.svg` as follows:
 
 ```bash
+# ls -d -1 /home/setevoy/*/
+/home/setevoy/Desktop/
+/home/setevoy/Downloads/
+/home/setevoy/Dropbox/
+/home/setevoy/Images/
+/home/setevoy/Soft/
+/home/setevoy/Temp/
+/home/setevoy/VirtualBox VMs/
+
 // src/index.js
 import Logo from './logo.svg';
 
