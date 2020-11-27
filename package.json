@@ -2,7 +2,7 @@
     "name": "rollup-plugin-mxn-copy",
     "main": "rollup-plugin-mxn-copy.js",
     "description": "Rollup plugin for copying assets into the output directory of your bundle",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "homepage": "https://github.com/ZimNovich/rollup-plugin-mxn-copy",
     "license": "MIT",
     "author": {

@@ -75,11 +75,9 @@ const copyFolderRecursive = async function(source, target)
 module.exports = function(options) {
     // Setting default options
     const defaults = {
-        assets: [],
-        verbose: false,
-        overwrite: true,
-        include: "*.svg",
-        prepend: "**/"
+        copy: [],
+        verbose: true,
+        restrictive: true
 	};
 
 	// Mixing mandatory and user provided arguments
@@ -126,44 +124,61 @@ module.exports = function(options) {
                 //     fs.copy(asset, path.join(outputDirectory, path.basename(asset)))
                 // );
       
-                options.assets.map(async asset => {
+                options.copy.map(async asset => {
                     try {
-                        const relAssetPath = path.relative(sourceDir, asset);
-                        if (relAssetPath.startsWith("..") ) {
-                            throw new Error("Assets should reside within the input directory");
+                        let fromPath = asset.from;
+                        let toPath   = asset.to;
+
+                        // Correct toPath if it ends with slash ("/" or "\\")
+                        if (toPath.endsWith("/") || toPath.endsWith("\\") ) {
+                            toPath += path.basename(fromPath);
                         }
 
-                        const assetPath = path.join(sourceDir, relAssetPath);
-                        const targetPath = path.join(destDir, relAssetPath);
+                        if (options.restrictive) { // Restrictive mode
+                            // Check input path
+                            const relFromPath = path.relative(sourceDir, fromPath);
+                            if (relFromPath.startsWith("..") ) {
+                                throw new Error("Assets to copy should reside within the input directory");
+                            }
+
+                            // Check output path
+                            const relToPath = path.relative(destDir, toPath);
+                            if (relToPath.startsWith("..") ) {
+                                throw new Error("Resulting copies should reside within the output directory");
+                            }
+
+                            fromPath = path.join(sourceDir, relFromPath);
+                            toPath   = path.join(destDir, relToPath);
+                        }
 
                         if (options.verbose) {
-                            console.log("Copying asset from %j to %j", assetPath, targetPath);
+                            console.log("Copying asset from %j to %j", fromPath, toPath);
                         }
 
-                        const absAssetPath = path.resolve(assetPath);
-                        const absTargetPath = path.resolve(targetPath);
+                        const absFromPath = path.resolve(fromPath);
+                        const absToPath   = path.resolve(toPath);
 
                         // Check if source exists
                         // Tests a user's permissions for the file or directory specified by path
                         // await fs.promises.access(absAssetPath);
                         try {
-                            const stats = await fs.promises.lstat(absAssetPath);
+                            const stats = await fs.promises.lstat(fromPath);
                             if (stats.isFile() ) {
                                 // Copying file. See:
                                 // - https://stackoverflow.com/questions/11293857/fastest-way-to-copy-a-file-in-node-js
-                                await fs.promises.copyFile(absAssetPath, absTargetPath);
+                                await fs.promises.copyFile(absFromPath, absToPath);
                             }
                             if (stats.isDirectory() ) {
                                 // Copying directory
-                                await copyFolderRecursive(absAssetPath, absTargetPath);
+                                await copyFolderRecursive(absFromPath, absToPath);
                             }
                         }
                         catch (e) {
-                            this.warn(`Asset ${asset} does not exist. Error: ${e}`);
+                            this.warn(`Asset ${asset.from} does not exist. Error: ${e}`);
                         }
                     }
                     catch (e) {
-                        this.warn(`Could not copy ${asset} because of an error: ${e}`);
+                        this.warn(`Could not copy ${asset.from} because of an error: ${e}`);
                     }
                 })
             );
