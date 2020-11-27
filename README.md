@@ -68,7 +68,7 @@ This plugin has the following configuration options:
 
 | Property      | Description    | Default      |
 |---------------|----------------|--------------|
-| `copy`        | An array of objects with paths to files or directories to copy to the output folder. | `[]` |
+| `copy`        | An array of objects with paths to files or directories to copy `from` source `to` destination. | `[]` |
 | `verbose`     | This option will output additional information about operations being performed. | `false` |
 | `restrictive` | Enabling this option restricts access to all directories, except for input and output. | `false` |
 
