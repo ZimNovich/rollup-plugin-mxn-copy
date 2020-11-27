@@ -76,12 +76,12 @@ module.exports = function(options) {
     // Setting default options
     const defaults = {
         copy: [],
-        verbose: true,
-        restrictive: true
-	};
+        verbose: false,
+        restrictive: false
+    };
 
-	// Mixing mandatory and user provided arguments
-	// Note: Object.assign() does not throw on null or undefined sources
+    // Mixing mandatory and user provided arguments
+    // Note: Object.assign() does not throw on null or undefined sources
     options = Object.assign(defaults, options);
     let sourceDir = "";
 
