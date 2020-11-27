@@ -47,11 +47,11 @@ export default {
 	plugins: [
 		// ... other plugins ...
 		rollupMxnCopy({
-			assets: [
+			copy: [
 				// You can include files & directories
-				"src/index.html",
-				"src/logo.svg",
-				"src/preact"
+				{ from: "src/index.html", to: "bundle/index.html" },
+				{ from: "src/logo.svg",   to: "bundle/" },
+				{ from: "src/preact",     to: "bundle/preact" }
 			]
 		})
 	]
@@ -66,10 +66,11 @@ On final bundle generation the provided files will be copied over into the outpu
 
 This plugin has the following configuration options:
 
-| Property    | Description    | Default      |
-|-------------|----------------|--------------|
-| `assets`    | An array of paths to files or directories to copy to the output folder. | `[]` |
-| `verbose`   | This option will output additional information about operations being performed. | `false` |
+| Property      | Description    | Default      |
+|---------------|----------------|--------------|
+| `copy`        | An array of objects with paths to files or directories to copy to the output folder. | `[]` |
+| `verbose`     | This option will output additional information about operations being performed. | `false` |
+| `restrictive` | This option will output additional information about operations being performed. | `false` |
 
 ## License
 
